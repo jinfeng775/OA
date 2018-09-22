@@ -1759,16 +1759,16 @@ ul.activity-timeline > li {
 
 /*# sourceMappingURL=main.css.map */
 /*自己写的*/
-#zhezhaobao{
+#zhezhaobao,#cxbao{
 	display: none;
-	position: absolute;
+	position: fixed;
 	z-index: 99999999999999999;
 	height: 100%;
 	width: 100%;
 	background: rgba(000,000,000,0.6);
 	
 }
-#zhezhaobao .zhezhao{
+.zhezhao,.cx{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1784,4 +1784,13 @@ ul.activity-timeline > li {
 .danxuan label{
 	float: left;
 	margin-right: 10px;
+}
+#cxbao .cxc{padding-top: 32px;
+	position: relative;
+	max-height: 300px;
+	overflow: auto;
+}
+#cxbao .cxc .tou{
+	position: fixed;
+	top: 0;
 }

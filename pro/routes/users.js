@@ -54,7 +54,19 @@ coll.find({name:req.body.name}).toArray((err,data)=>{
 	})	
 
 	}
-
+//删除
+if(req.body.ip==2){
+	
+	var shuju = JSON.parse(req.body.shu)
+		mongodb.connect(db_str,(err,database)=>{
+		database.collection('users',(err,coll)=>{
+			for(var i in shuju){
+				coll.deleteMany({name:shuju[i]})
+			}
+			database.close()
+				})
+		})
+}
 
 
 

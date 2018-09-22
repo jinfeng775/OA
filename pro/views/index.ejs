@@ -59,6 +59,57 @@
 							</div>
 		</div>
 	</div>
+	<!--查询-->
+	<div id="cxbao">
+		<div class="cx">
+				<div class="panel cxc">
+								
+								<div class="panel-heading tou">
+									<h3 class="panel-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查询结果</font></font></h3>
+									
+								</div>
+								<div class="panel-body">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><label class="fancy-checkbox">
+										<input id="quanxuan" type="checkbox"  >
+										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全选</font></font></span>
+									</label></font></font></th>
+												
+												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">学号</font></font></th>
+												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">名字</font></font></th>
+												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">班级</font></font></th>
+												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">性别</font></font></th>
+												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">年龄</font></font></th>
+												
+												
+											</tr>
+										</thead>
+										<tbody>
+											<%data.map(function(item,i){%>
+												<%if(item.name!=00000){%>
+											<tr>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><label class="fancy-checkbox">
+										<input class="danxuans" type="checkbox" data-id="<%-item.name%>">
+										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span>
+									</label></font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.name%></font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.xingming%></font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.banji%></font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.xingbie%></font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.nianling%></font></font></td>
+												
+											</tr>
+											<%}%>
+											<%})%>
+										</tbody>
+										
+									</table>
+								</div>
+							</div>
+		</div>
+	</div>
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
@@ -73,17 +124,18 @@
 				<form class="navbar-form navbar-left">
 					<div class="input-group">
 						<input type="text" value="" class="form-control" placeholder="请输入学号或者name查询">
-						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+						<span class="input-group-btn"><button id="chaxun" type="button" class="btn btn-primary">Go</button></span>
 					</div>
 				</form>
 				
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-						<a href="page-login" class="dropdown-toggle">
+						<%if(!name){%>
 						<li class="">
-							<i class="lnr lnr-shirt"></i> <span>登录</span> </a>
+							<a href="page-login" class="dropdown-toggle"><i class="lnr lnr-shirt"></i> <span>登录</span> </a>
 						
 						</li>
+						<%}%>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span><%-name %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
@@ -131,7 +183,7 @@
 										<thead>
 											<tr>
 												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><label class="fancy-checkbox">
-										<input type="checkbox">
+										<input id="quanxuan" type="checkbox"  >
 										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全选</font></font></span>
 									</label></font></font></th>
 												
@@ -149,7 +201,7 @@
 												<%if(item.name!=00000){%>
 											<tr>
 												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><label class="fancy-checkbox">
-										<input type="checkbox">
+										<input class="danxuans" type="checkbox" data-id="<%-item.name%>">
 										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span>
 									</label></font></font></td>
 												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.name%></font></font></td>
@@ -165,7 +217,7 @@
 										
 									</table>
 									<%if(name==000000){%>
-									<button type="button" class="btn btn-danger btn-lg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除选中</font></font></button>
+									<button type="button" id="shanchu" class="btn btn-danger btn-lg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除选中</font></font></button>
 									<%}%>
 								</div>
 							</div>
@@ -194,6 +246,9 @@
 		$(function(){
 			$("#tianjia").click(function(){
 				$("#zhezhaobao").show()
+			})
+			$("#chaxun").click(function(){
+				$("#cxbao").show()
 			})
 			$("#quxiao").click(function(){
 				$("#zhezhaobao").hide()
