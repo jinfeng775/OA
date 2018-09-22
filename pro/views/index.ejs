@@ -30,16 +30,16 @@
 									<h3 class="panel-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">学生信息</font></font></h3>
 								</div>
 								<div class="panel-body">
-									<input type="tel" class="form-control" placeholder="学号">
+									<input type="tel" id="xuehao" class="form-control" placeholder="学号">
 									<br>
-									<input type="text" class="form-control" value=""placeholder="name">
+									<input type="text" id="name" class="form-control" value=""placeholder="name">
 									<br>
-									<input type="text" class="form-control" value=""placeholder="班级">
+									<input type="text" id="banji" class="form-control" value=""placeholder="班级">
 									<br>
-									<input type="text" class="form-control" value=""placeholder="年龄">
+									<input type="text" id="nianling" class="form-control" value=""placeholder="年龄">
 									<br>
 									<div class="danxuan"><label class="fancy-radio">
-										<input name="gender" value="male" type="radio">
+										<input name="gender" value="male" type="radio" id="nanx" checked="checked">
 										<span><i></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">男</font></font></span>
 									</label><label class="fancy-radio">
 										<input name="gender" value="male" type="radio">
@@ -49,7 +49,7 @@
 									
 									<div class="row">
 										<div class="col-md-6">
-											<button type="button" class="btn btn-primary btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交</font></font></button>
+											<button type="button" id="tijiao" class="btn btn-primary btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交</font></font></button>
 										</div>
 										<div class="col-md-6">
 											<button type="button" id="quxiao" class="btn btn-warning btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">取消</font></font></button>
@@ -64,7 +64,7 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+				<a href="page-login"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -79,15 +79,10 @@
 				
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
+						<a href="page-login" class="dropdown-toggle">
+						<li class="">
+							<i class="lnr lnr-shirt"></i> <span>登录</span> </a>
 						
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Basic Use</a></li>
-								<li><a href="#">Working With Data</a></li>
-								<li><a href="#">Security</a></li>
-								<li><a href="#">Troubleshooting</a></li>
-							</ul>
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span><%-name %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
@@ -127,7 +122,9 @@
 			<div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">学生表</font></font></h3>
+									<%if(name==000000){%>
 									<p class="right demo-button"><button type="button" id="tianjia" class="btn"><i class="fa fa-check-circle"></i><font style="vertical-align: inherit;"><font > 添加</font></font></button></p>
+									<%}%>
 								</div>
 								<div class="panel-body">
 									<table class="table table-striped">
@@ -148,23 +145,28 @@
 											</tr>
 										</thead>
 										<tbody>
-											
+											<%data.map(function(item,i){%>
+												<%if(item.name!=00000){%>
 											<tr>
 												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><label class="fancy-checkbox">
 										<input type="checkbox">
 										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span>
 									</label></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">321321</font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简</font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">母鹿</font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@jane</font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@jane</font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.name%></font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.xingming%></font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.banji%></font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.xingbie%></font></font></td>
+												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.nianling%></font></font></td>
 												
 											</tr>
+											<%}%>
+											<%})%>
 										</tbody>
 										
 									</table>
+									<%if(name==000000){%>
 									<button type="button" class="btn btn-danger btn-lg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除选中</font></font></button>
+									<%}%>
 								</div>
 							</div>
 			
@@ -198,6 +200,7 @@
 			})
 		})
 	</script>
+	<script src="javascripts/indexA.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		
 	$(function() {
