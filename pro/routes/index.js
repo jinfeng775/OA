@@ -13,8 +13,8 @@ router.get('/', function(req, res, next) {
 			}).toArray((err, data) => {
 				res.render('index', {
 					name: req.session.name,
-					data:data
-				});
+					data:data,
+					xingming:req.session.xingming			});
 //				console.log(data)
 				database.close()
 			})
@@ -22,8 +22,27 @@ router.get('/', function(req, res, next) {
 		})
 	})
 });
-
+//退出
+router.get('/relogin',(req,res)=>{
+	req.session.destroy((err)=>{
+		if(err){
+			console.log(err)
+		}else{
+			res.redirect('/')
+		}
+	})
+})
 router.get('/page-login', (req, res) => {
 	res.render('page-login', {})
 })
+router.get('/xgmima', (req, res) => {
+	res.render('xgmima', {name: req.session.name,mima:req.session.mima})
+})
+router.get('/geren', (req, res) => {
+	res.render('geren', {name: req.session.name,
+		data:req.session.data,
+		xingming:req.session.xingming		
+					})
+})
+
 module.exports = router;

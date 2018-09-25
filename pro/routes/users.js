@@ -20,6 +20,9 @@ shujuku(req.body,function(err,data){
 		if(data.length>0){
 							console.log(data[0].name)
 							req.session.name = data[0].name;
+							req.session.data = data[0];
+							req.session.xingming = data[0].xingming;
+							req.session.mima = data[0].mima;
 					res.send('1')
 				}else{
 					res.send('2')
@@ -58,6 +61,7 @@ coll.find({name:req.body.name}).toArray((err,data)=>{
 if(req.body.ip==2){
 	
 	var shuju = JSON.parse(req.body.shu)
+	console.log(shuju)
 		mongodb.connect(db_str,(err,database)=>{
 		database.collection('users',(err,coll)=>{
 			for(var i in shuju){
@@ -67,9 +71,36 @@ if(req.body.ip==2){
 				})
 		})
 }
+//查询
+if(req.body.ip==3){
+	console.log(req.body.shu)
+		mongodb.connect(db_str,(err,database)=>{
+		database.collection('users',(err,coll)=>{
+			coll.find({$or:[{name:new RegExp(req.body.shu)},{xingming:new RegExp(req.body.shu)},{xingbie:new RegExp(req.body.shu)}]}).toArray((err,data)=>{
+				if(data.length>0){
+				
+						res.send(data)
+				}else{
+					res.send('2')
+				}
+				database.close()
+			})
+			})
+		})
+}
 
-
-
+//修改
+if(req.body.ip==4){
+	var obj1 ={};
+	obj1[req.body.shu]=req.body.shunew;
+ 		var shuid = req.body.shuid;
+		mongodb.connect(db_str,(err,database)=>{
+		database.collection('users',(err,coll)=>{
+			coll.updateOne({"name":shuid},{$set:obj1})
+			database.close()
+			})
+		})
+}
 
 })
 

@@ -1759,9 +1759,10 @@ ul.activity-timeline > li {
 
 /*# sourceMappingURL=main.css.map */
 /*自己写的*/
-#zhezhaobao,#cxbao{
+#zhezhaobao,#cxbao,.xiu{
 	display: none;
 	position: fixed;
+	
 	z-index: 99999999999999999;
 	height: 100%;
 	width: 100%;
@@ -1769,12 +1770,12 @@ ul.activity-timeline > li {
 	
 }
 .zhezhao,.cx{
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	margin: auto;
+	
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -200px;
+	margin-left: -300px;
 	width: 600px;
 	height: 600px;
 }
@@ -1785,12 +1786,34 @@ ul.activity-timeline > li {
 	float: left;
 	margin-right: 10px;
 }
-#cxbao .cxc{padding-top: 32px;
-	position: relative;
+#cxbao .cxc{
+	padding-top: 32px;
+	
 	max-height: 300px;
 	overflow: auto;
 }
 #cxbao .cxc .tou{
-	position: fixed;
+	overflow: hidden;
+	margin-bottom: 10px;
+	z-index: 999999;
+	width: 100%;
+	display: inline-block;
+	background: #fff;
+	position: absolute;
 	top: 0;
+}
+#cxbao .cxc .tou h3{
+	float: left;
+}
+#cxbao .cxc .tou>button{
+	float: right;
+}
+
+.xiu .panel{
+position: absolute;
+top: 50%;
+left: 50%;
+margin-left: -250px;
+margin-top: -90px;
+width: 500px;	
 }

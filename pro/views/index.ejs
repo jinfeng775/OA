@@ -59,6 +59,30 @@
 							</div>
 		</div>
 	</div>
+	<!--修改遮罩层-->
+	<div class="xiu">
+		<div class="xiun">
+			<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">修改</font></font></h3>
+								</div>
+								<div class="panel-body">
+									<input id="xginput" class="form-control input-lg" placeholder=".input-lg" type="text">
+									<br>
+									<div class="row">
+										<div class="col-md-6">
+											<button type="button" id="xiugaix" class="btn btn-primary btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">修改</font></font></button>
+										</div>
+										<div class="col-md-6">
+											<button type="button" id="quxiaox" class="btn btn-warning btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">取消</font></font></button>
+										</div>
+									</div>
+									
+									
+								</div>
+							</div>
+		</div>
+	</div>
 	<!--查询-->
 	<div id="cxbao">
 		<div class="cx">
@@ -66,14 +90,18 @@
 								
 								<div class="panel-heading tou">
 									<h3 class="panel-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查询结果</font></font></h3>
-									
+									<%if(name==000000){%>
+									<button type="button" id="shanchu" style="background: red;" class="btn btn-danger btn-lg shanchu"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除选中</font></font></button>
+									<%}%>
+									<button type="button" id="close" style="background: red;" class="btn "><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">关闭</font></font></button>
+								
 								</div>
 								<div class="panel-body">
 									<table class="table table-striped">
 										<thead>
 											<tr>
 												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><label class="fancy-checkbox">
-										<input id="quanxuan" type="checkbox"  >
+										<input id="quanxuanC" type="checkbox"  >
 										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全选</font></font></span>
 									</label></font></font></th>
 												
@@ -86,27 +114,15 @@
 												
 											</tr>
 										</thead>
-										<tbody>
-											<%data.map(function(item,i){%>
-												<%if(item.name!=00000){%>
-											<tr>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><label class="fancy-checkbox">
-										<input class="danxuans" type="checkbox" data-id="<%-item.name%>">
-										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span>
-									</label></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.name%></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.xingming%></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.banji%></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.xingbie%></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.nianling%></font></font></td>
-												
-											</tr>
-											<%}%>
-											<%})%>
+										<tbody id="chaxunconte">
+											<span>没有查询结果，请输入入查询学号 123 或者 查询NAME 或者性别ps:支持模糊查询 </span>
 										</tbody>
 										
 									</table>
 								</div>
+								<!--<%if(name==000000){%>
+									<button type="button" id="" class="btn btn-danger btn-lg shanchu"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除选中</font></font></button>
+									<%}%>-->
 							</div>
 		</div>
 	</div>
@@ -139,9 +155,13 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span><%-name %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="#"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
+								<%if(name){%>
+								<li><a href="/geren?<%-name %>" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
+								<%}else{%>
+								<li><a href="/geren>" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
+								<%}%>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
+								<li><a onclick="location.href='/relogin'" href="#"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
 							</ul>
 						</li>
 						<!-- <li>
@@ -157,10 +177,16 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>首页</span></a></li>
-						<li><a href="index.html" class="active"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
+						<li><a href="/" class="active"><i class="lnr lnr-home"></i> <span>首页</span></a></li>
+						<!--<li><a href="/geren" class="active geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>-->
+						<%if(name){%>
+						<li><a href="/geren?<%-name%>" class="active geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
+								
+								<%}else{%>
+									<li><a href="/geren" class="active geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
+								<%}%>
 								<li><a href="index.html" class="active"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
-									<li><a href="index.html" class="active"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
+									<li><a onclick="location.href='/relogin'" href="#" class="active"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -196,19 +222,23 @@
 												
 											</tr>
 										</thead>
-										<tbody>
+										<%if(name==000000){%>
+										<tbody id="tbodaa">
+										<%}else{%>
+											<tbody >
+										<%}%>
 											<%data.map(function(item,i){%>
 												<%if(item.name!=00000){%>
-											<tr>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><label class="fancy-checkbox">
+											<tr data-id="<%-item.name%>">
+												<td><label class="fancy-checkbox">
 										<input class="danxuans" type="checkbox" data-id="<%-item.name%>">
-										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span>
-									</label></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.name%></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.xingming%></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.banji%></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.xingbie%></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-item.nianling%></font></font></td>
+										<span></span>
+									</label></td>
+												<td><font style="vertical-align: inherit;" data-bt="name"><%-item.name%></font></td>
+												<td><font style="vertical-align: inherit;"data-bt="xingming"><%-item.xingming%></font></td>
+												<td><font style="vertical-align: inherit;"data-bt="banji"><%-item.banji%></font></td>
+												<td><font style="vertical-align: inherit;"data-bt="xingbie"><%-item.xingbie%></font></td>
+												<td><font style="vertical-align: inherit;"data-bt="nianling"><%-item.nianling%></font></td>
 												
 											</tr>
 											<%}%>
@@ -217,7 +247,7 @@
 										
 									</table>
 									<%if(name==000000){%>
-									<button type="button" id="shanchu" class="btn btn-danger btn-lg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除选中</font></font></button>
+									<button type="button" id="shanchu" class="btn btn-danger btn-lg shanchu"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除选中</font></font></button>
 									<%}%>
 								</div>
 							</div>
@@ -244,15 +274,15 @@
 	<script src="assets/scripts/klorofil-common.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			//添加
 			$("#tianjia").click(function(){
 				$("#zhezhaobao").show()
-			})
-			$("#chaxun").click(function(){
-				$("#cxbao").show()
 			})
 			$("#quxiao").click(function(){
 				$("#zhezhaobao").hide()
 			})
+		
+			
 		})
 	</script>
 	<script src="javascripts/indexA.js" type="text/javascript" charset="utf-8"></script>
