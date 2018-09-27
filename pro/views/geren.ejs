@@ -23,7 +23,42 @@
 </head>
 
 <body>
-	
+	<div id="zhezhaobaoG">
+		<div class="zhezhaoG">
+			<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">学生信息</font></font></h3>
+								</div>
+								<div class="panel-body">
+									<input type="tel" id="xuehao" class="form-control" placeholder="学号">
+									<br>
+									<input type="text" id="name" class="form-control" value=""placeholder="name">
+									<br>
+									<input type="text" id="banji" class="form-control" value=""placeholder="班级">
+									<br>
+									<input type="text" id="nianling" class="form-control" value=""placeholder="年龄">
+									<br>
+									<div class="danxuan"><label class="fancy-radio">
+										<input name="gender" value="male" type="radio" id="nanx" checked="checked">
+										<span><i></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">男</font></font></span>
+									</label><label class="fancy-radio">
+										<input name="gender" id="nany" value="male" type="radio">
+										<span><i></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">女</font></font></span>
+									</label></div>
+									<br />
+									
+									<div class="row">
+										<div class="col-md-6">
+											<button type="button" id="tijiaoa" class="btn btn-primary btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交</font></font></button>
+										</div>
+										<div class="col-md-6">
+											<button type="button" id="quxiao" class="btn btn-warning btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">取消</font></font></button>
+										</div>
+									</div>
+								</div>
+							</div>
+		</div>
+	</div>
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
@@ -50,9 +85,9 @@
 								<%if(name){%>
 								<li><a href="/geren?<%-name %>" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
 								<%}else{%>
-								<li><a href="/geren>" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
+								<li><a href="/geren" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
 								<%}%>
-								<li><a href="#"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
+								<li><a href="/xgmima"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
 								<li><a onclick="location.href='/relogin'" href="#"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
 							</ul>
 						</li>
@@ -76,7 +111,7 @@
 								<%}else{%>
 									<li><a href="/geren" class="active geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
 								<%}%>
-								<li><a href="index.html" class="active"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
+								<li><a href="/xgmima" class="active"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
 									<li><a onclick="location.href='/relogin'" href="#" class="active"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
 					</ul>
 				</nav>
@@ -90,28 +125,16 @@
 			<div class="main-content" style="padding: 5% 10%;">
 				
 			<%if(name){%>
-			<div class="profile" >
+			<div class="profile" style="width: 50%;margin: 0 auto;background: #fff;">
 								<!-- PROFILE HEADER -->
 								<div class="profile-header">
 									<div class="overlay"></div>
 									<div class="profile-main">
 										<img src="assets/img/user-medium.png" class="img-circle" alt="阿凡达">
 										<h3 class="name"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-data.xingming%></font></font></h3>
-										<span class="online-status status-available"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可得到</font></font></span>
+										<span class="online-status status-available"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">欢迎您到到来！</font></font></span>
 									</div>
-									<div class="profile-stat">
-										<div class="row">
-											<div class="col-md-4 stat-item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-												45个</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">项目</font></font></span>
-											</div>
-											<div class="col-md-4 stat-item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-												15个</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">奖项</font></font></span>
-											</div>
-											<div class="col-md-4 stat-item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-												2174 </font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">分</font></font></span>
-											</div>
-										</div>
-									</div>
+									
 								</div>
 								<!-- END PROFILE HEADER -->
 								<!-- PROFILE DETAIL -->
@@ -119,17 +142,17 @@
 									<div class="profile-info">
 										<h4 class="heading"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">基本信息</font></font></h4>
 										<ul class="list-unstyled list-justify">
-											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">学号</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-data.name%></font></font></span></li>
-											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">姓名</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-data.xingming%></font></font></span></li>
-											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">班级</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-data.banji%></font></font></span></li>
-											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">年纪</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-data.nianling%></font></font></span></li>
+											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">学号</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"class="listul"><%-data.name%></font></font></span></li>
+											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">姓名</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"class="listul"><%-data.xingming%></font></font></span></li>
+											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">班级</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"class="listul"><%-data.banji%></font></font></span></li>
+											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">年纪</font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"class="listul"><%-data.nianling%></font></font></span></li>
 											
-											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">性别</font></font><span><a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><%-data.xingbie%></font></font></a></span></li>
+											<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">性别</font></font><span><a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"class="listul"><%-data.xingbie%></font></font></a></span></li>
 										</ul>
 									</div>
 									
 									
-									<div class="text-center"><a href="#" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑个人资料</font></font></a></div>
+									<div id="bjxiugai" class="text-center"><a href="javascript:;" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑个人资料</font></font></a></div>
 								</div>
 								<!-- END PROFILE DETAIL -->
 							</div>
@@ -158,6 +181,12 @@
 	<script>
 		
 	$(function() {
+//			$("#bjxiugai").click(function(){
+//				$("#zhezhaobaoG").show()
+//			})
+			$("#quxiao").click(function(){
+				$("#zhezhaobaoG").hide()
+			})
 		var data, options;
 
 		// headline charts

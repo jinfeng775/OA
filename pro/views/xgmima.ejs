@@ -45,14 +45,14 @@
 						</li>
 						<%}%>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span><%-name %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span id="idname"><%-name %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<%if(name){%>
 								<li><a href="/geren?<%-name %>" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
 								<%}else{%>
-								<li><a href="/geren>" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
+								<li><a href="/geren" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
 								<%}%>
-								<li><a href="#"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
+								<li><a href="/xgmima"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
 								<li><a onclick="location.href='/relogin'" href="#"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
 							</ul>
 						</li>
@@ -76,7 +76,7 @@
 								<%}else{%>
 									<li><a href="/geren" class="active geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
 								<%}%>
-								<li><a href="index.html" class="active"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
+								<li><a href="/xgmima" class="active"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
 									<li><a onclick="location.href='/relogin'" href="#" class="active"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
 					</ul>
 				</nav>
@@ -96,8 +96,8 @@
 								<div class="panel-body">
 									<input id="xgmmipt" class="form-control input-lg" placeholder="旧密码" type="text">
 									<br>
-								<input id="xginput" class="form-control input-lg" placeholder="新密码" type="text">
-									<br><input id="xginput" class="form-control input-lg" placeholder="确认新密码" type="text">
+								<input id="xginput1" class="form-control input-lg xginput1" placeholder="新密码" type="text">
+									<br><input id="xginput2" class="form-control input-lg xginput1" placeholder="确认新密码" type="text">
 									<br>
 									<div class="row">
 										<br>
@@ -122,7 +122,6 @@
 		<footer>
 			
 		</footer>
-		<%-mima%>
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
@@ -136,6 +135,11 @@
 	<script>
 	
 	$(function() {
+		
+		
+		
+		
+		
 		var data, options;
 
 		// headline charts

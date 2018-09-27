@@ -16,6 +16,8 @@
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 	<!-- GOOGLE FONTS -->
+	
+	
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
@@ -23,6 +25,7 @@
 </head>
 
 <body>
+	<!--新建学生列表-->
 	<div id="zhezhaobao">
 		<div class="zhezhao">
 			<div class="panel">
@@ -97,6 +100,7 @@
 								
 								</div>
 								<div class="panel-body">
+									
 									<table class="table table-striped">
 										<thead>
 											<tr>
@@ -111,10 +115,16 @@
 												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">性别</font></font></th>
 												<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">年龄</font></font></th>
 												
-												
+												<!--	<tbody id="chaxunconte">-->
 											</tr>
 										</thead>
-										<tbody id="chaxunconte">
+										<%if(name==000000){%>
+										<tbody  class="chaxunconte tbodaa">
+										<%}else{%>
+											<tbody class="chaxunconte">
+										<%}%>
+									
+											
 											<span>没有查询结果，请输入入查询学号 123 或者 查询NAME 或者性别ps:支持模糊查询 </span>
 										</tbody>
 										
@@ -158,9 +168,9 @@
 								<%if(name){%>
 								<li><a href="/geren?<%-name %>" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
 								<%}else{%>
-								<li><a href="/geren>" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
+								<li><a href="/geren" class="geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
 								<%}%>
-								<li><a href="#"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
+								<li><a href="/xgmima"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
 								<li><a onclick="location.href='/relogin'" href="#"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
 							</ul>
 						</li>
@@ -185,7 +195,7 @@
 								<%}else{%>
 									<li><a href="/geren" class="active geren"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
 								<%}%>
-								<li><a href="index.html" class="active"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
+								<li><a href="/xgmima" class="active"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
 									<li><a onclick="location.href='/relogin'" href="#" class="active"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
 					</ul>
 				</nav>
@@ -223,7 +233,7 @@
 											</tr>
 										</thead>
 										<%if(name==000000){%>
-										<tbody id="tbodaa">
+										<tbody class="tbodaa">
 										<%}else{%>
 											<tbody >
 										<%}%>
@@ -250,8 +260,36 @@
 									<button type="button" id="shanchu" class="btn btn-danger btn-lg shanchu"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除选中</font></font></button>
 									<%}%>
 								</div>
-							</div>
+								<nav aria-label="Page navigation" >
+  <ul class="pagination " style="padding-left: 40%;">
+    <li>
+      <a href="/?pageNo=<%-pageNo<=1?1: parseInt(pageNo)-1 %>" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    
+    <% if(page>4){ %>
+    		<li><a href="/?pageNo=1">1</a></li>
+    		<li><a href="/?pageNo=2">2</a></li>
+    		<li><a href="#">.....</a></li>
+    		<li><a href="/?pageNo=<%-page-1 %>"><%-page-1 %></a></li>
+    		<li><a href="/?pageNo=<%-page %>"><%-page %></a></li>
+    <% }else{ %>
+    	
+    		<% for(let i=0;i<page;i++){ %>	
+    			<li><a href="/?pageNo=<%-i+1 %>"><%-i+1 %></a></li>
+    		<% } %>
+    		
+    <% } %>
+    <li>
+      <a href="/?pageNo=<%-pageNo>=page?page: parseInt(pageNo)+1 %>" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav> 
 			
+							</div>
 			
 			
 			</div>
@@ -266,6 +304,7 @@
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
+	
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -281,7 +320,7 @@
 			$("#quxiao").click(function(){
 				$("#zhezhaobao").hide()
 			})
-		
+			
 			
 		})
 	</script>

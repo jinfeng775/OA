@@ -1,4 +1,5 @@
 var express = require('express');
+var async=require('async');
 var mongodb=require('mongodb').MongoClient;
 var db_str="mongodb://localhost:27017/test";
 var ObjectId=require('mongodb').ObjectId;
@@ -97,11 +98,44 @@ if(req.body.ip==4){
 		mongodb.connect(db_str,(err,database)=>{
 		database.collection('users',(err,coll)=>{
 			coll.updateOne({"name":shuid},{$set:obj1})
+			res.send('1')
+			database.close()
+			})
+		})
+}
+//验证旧密码
+if(req.body.ip==5){
+	console.log(req.body)
+	mongodb.connect(db_str,(err,database)=>{
+		database.collection('users',(err,coll)=>{
+			coll.find({name:req.body.mz}).toArray((err,data)=>{
+				if(data[0].mima==req.body.shu){
+					res.send('1')
+				}else{
+					res.send('2')
+				}
+			})
+			})
+		})
+}
+//修改个人资料
+if(req.body.ip==6){
+	console.log(req.body)
+	mongodb.connect(db_str,(err,database)=>{
+		database.collection('users',(err,coll)=>{
+			coll.updateOne({"name":req.body.name},{$set:{"xingming":req.body.xingming,"banji":req.body.banji,"nianling":req.body.nianling,"xingbie":req.body.xingbie}})
+			res.send('1')
+//			coll.find({"name":req.body.name}).toArray((err,data)=>{
+//						req.session.data = data[0];
+//		})
 			database.close()
 			})
 		})
 }
 
+
+
+//业务结束
 })
 
 

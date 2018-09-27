@@ -33,6 +33,45 @@ $(function() {
 			alert("请全部填写")
 		}
 	})
+	//修改个人资料
+	$("#tijiaoa").click(function() {
+		console.log(123)
+		var xingbie = "";
+		$("#nanx").prop("checked") ? xingbie = "男" : xingbie = "女";
+		if($("#xuehao").val() != "" && $("#name").val() != "" && $("#banji").val() != "" && $("#nianling").val() != "") {
+
+			$.ajax({
+				type: "post",
+				url: "/users/yewu",
+				data: {
+					name: $("#xuehao").val(),
+					xingming: $("#name").val(),
+					banji: $("#banji").val(),
+					nianling: $("#nianling").val(),
+					xingbie: xingbie,
+					ip: "6"
+				},
+				success: function(data) {
+					console.log(data)
+
+					if(data == 1) {
+						alert('修改成功！')
+						$("#zhezhaobaoG").hide()
+						$(".listul").eq(0).html($("#xuehao").val())
+						$(".listul").eq(1).html($("#name").val())
+						$(".listul").eq(2).html($("#banji").val())
+						$(".listul").eq(3).html($("#nianling").val())
+						$("#nanx").prop("checked")? $(".listul").eq(4).html("男"):$(".listul").eq(4).html("女")
+						
+					} else {
+						alert('注册失败')
+					}
+				}
+			});
+		} else {
+			alert("请全部填写")
+		}
+	})
 
 	//	全选
 	$("#quanxuan").click(function() {
@@ -41,7 +80,7 @@ $(function() {
 
 	//	查询全选
 	$("#quanxuanC").click(function() {
-		$("#chaxunconte .danxuans").prop("checked", $(this).prop("checked"));
+		$(".chaxunconte .danxuans").prop("checked", $(this).prop("checked"));
 	})
 	//查询
 	
@@ -109,18 +148,18 @@ $(function() {
 
 				} else {
 					var bodystr = "";
-					var body = $("#chaxunconte")
+					var body = $(".chaxunconte")
 					data.map((item, i) => {
-						bodystr += `<tr>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><label class="fancy-checkbox">
+						bodystr += `<tr data-id="${data[i].name}">
+												<td><label class="fancy-checkbox">
 										<input class="danxuans" type="checkbox" data-id="${data[i].name}">
-										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span>
-									</label></font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${data[i].name}</font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${data[i].xingming}</font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${data[i].banji}</font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${data[i].xingbie}</font></font></td>
-												<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${data[i].nianling}</font></font></td>
+										<span></span>
+									</label></td>
+												<td><font style="vertical-align: inherit;" data-bt="name">${data[i].name}</font></td>
+												<td><font style="vertical-align: inherit;"data-bt="xingming">${data[i].xingming}</font></td>
+												<td><font style="vertical-align: inherit;"data-bt="banji">${data[i].banji}</font></td>
+												<td><font style="vertical-align: inherit;"data-bt="xingbie">${data[i].xingbie}</font></td>
+												<td><font style="vertical-align: inherit;"data-bt="nianling">${data[i].nianling}</font></td>
 												
 											</tr>
 						`
@@ -143,7 +182,7 @@ var tdid="";
 var	bt="";
 var btv="";
 
-$("#tbodaa").on("click","font",function(e){
+$(".tbodaa").on("click","font",function(e){
 	 tdid = $(e.target).parentsUntil("tbody").eq($(e.target).parentsUntil("tbody").size() - 1).attr("data-id")
 	 bt = $(e.target).attr("data-bt");
 	 btv = e.target.innerHTML;
@@ -175,6 +214,7 @@ $("#xiugaix").click(function(){
 
 					if(data == 1) {
 						alert('成功')
+						location.href="/"
 
 					} else {
 						alert('失败')
@@ -185,18 +225,97 @@ $("#xiugaix").click(function(){
 
 
 
-
-
+var yzmm = false;
+$("#xgmm").fadeOut()
 //修改密码
 $("#xgmmipt").blur(function(){
 	
 	console.log($("#xgmmipt").val())
+	$.ajax({
+
+				type: "post",
+				url: "/users/yewu",
+				data: {
+					mz:$("#idname").html(),
+					shu:$("#xgmmipt").val(),
+					ip: "5"
+				},
+				success: function(data) {
+
+					if(data == 1) {
+						yzmm = true;
+						$("#xgmmipt").css("border","1px solid #00FF00")
+
+					} else {
+						yzmm = false;
+							$("#xgmmipt").css("border","1px solid red")
+					}
+				}
+			});
 })
-$("#xgmm").click(function(){
+//新密码正则验证
+$("#xginput1").blur(function(){
+	   var reg = new RegExp("^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,22}$");    
+	
+	 if(!reg.test($(this).val())){    
+	 	$(this).css("border","1px solid red")
+    }else{
+    $(this).css("border","1px solid #00FF00")	
+    }
+})
+$("#xginput2").blur(function(){
+	if($("#xginput1").val()==$(this).val()&&$(this).val().length>5){
+	$(this).css("border","1px solid #00FF00")
+	
+	if(yzmm){
+		$("#xgmm").fadeIn()
+		$("#xgmm").click(fo)
+	}
+	}else{
+		$("#xgmm").unbind("click",fo);
+		$(this).css("border","1px solid red")
+	}
+})
+//发送修改请求函数事件
+function fo(){
+	
+
+	$.ajax({
+				type: "post",
+				url: "/users/yewu",
+				data: {						
+					shuid:$("#idname").html(),
+					shu: "mima",					
+					shunew:$("#xginput2").val(),
+					ip: "4"				
+				},
+				success: function(data) {
+
+					if(data == 1) {
+						alert("修改成功")
+						location.href="/page-login"
+					} else {
+					}
+				}
+			});
+}
+
+
+//编辑修改个人资料
+$("#bjxiugai").click(function(){
+	$("#zhezhaobaoG").show()
+	$("#xuehao").val($(".listul").eq(0).html())
+	$("#name").val($(".listul").eq(1).html())
+	$("#banji").val($(".listul").eq(2).html())
+	$("#nianling").val($(".listul").eq(3).html())
+	console.log($(".listul").eq(4).html())
+	if($(".listul").eq(4).html()=="男"){
+		$("#nanx").prop("checked",true)
+	}else{
+		$("#nany").prop("checked",true)
+	}
 	
 })
-
-
 
 
 //结尾
